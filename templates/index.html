@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8" />
+	<title>Wine Rating Predictor</title>
+
+	<link rel="stylesheet" type="text/css" href="../static/css/demo.css" />
+	<link rel="stylesheet" type="text/css" href="../static/css/style1.css" />
+	<link rel="shortcut icon" href="../static/images/favicon.ico">
+</head>
+
+<body id="page">
+	<ul class="cb-slideshow">
+		<li>
+			<span>Image 01</span>
+		</li>
+		<li>
+			<span>Image 02</span>
+		</li>
+		<li>
+			<span>Image 03</span>
+		</li>
+		<li>
+			<span>Image 04</span>
+		</li>
+		<li>
+			<span>Image 05</span>
+		</li>
+		<li>
+			<span>Image 06</span>
+		</li>
+	</ul>
+
+	<div class="container">
+		<br>
+		<div>
+			<h1 class="main-heading">
+				<strong>Wine Rating Predictor</strong>
+			</h1>
+		</div>
+		<hr>
+		<div>
+			<h4 class="secondary-heading">
+				<strong>Randomly Selected Wine</strong>
+			</h4>
+			{{results2|safe}}
+		</div>
+		<br>
+		<div>
+			<h4 class="secondary-heading">
+				<strong>Predicted Points</strong>
+			</h4>
+			{{results3|safe}}
+		</div>
+		<hr>
+		<div>
+			<h4 class="secondary-heading">
+				<strong>Select Your Wine Attributes</strong>
+			</h4>
+			<form class="form-inline" method="POST" action="{{ url_for('predictPoints') }}">
+				<div class="form-group">
+					<div class="input-group">
+						<div class="form-group">
+							<div>
+								<label for="varieties" class="dropdownlabel">Variety: </label>
+							</div>
+							<div>
+								<select name="varieties" class="selectpicker form-control">
+									{% for variety in varieties %}
+									<option value="{{ variety }}">{{ variety }}</option>
+									{% endfor %}
+								</select>
+							</div>
+
+						</div>
+						<div class="form-group">
+							<div>
+								<label for="wineries" class="dropdownlabel">Winery: </label>
+							</div>
+							<div>
+								<select name="wineries" class="selectpicker form-control">
+									{% for winery in wineries %}
+									<option value="{{ winery }}">{{ winery }}</option>
+									{% endfor %}
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<div>
+								<label for="regions" class="dropdownlabel">Region_1: </label>
+							</div>
+							<div>
+								<select name="regions" class="selectpicker form-control">
+									{% for region in regions %}
+									<option value="{{ region }}">{{ region }}</option>
+									{% endfor %}
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<div>
+								<label for="price">Price:</label>
+							</div>
+							<div>
+								<input name="price" type="text" class="form-control" id="price" value='10'>
+							</div>
+						</div>
+
+					</div>
+					<br>
+					<button type="submit" class="btn btn-default form-control" style="font-weight: bold;">Submit</button>
+				</div>
+			</form>
+		</div>
+		<br>
+		<div>
+			<h4 class="secondary-heading">
+				<strong>Selected Wine Attributes</strong>
+			</h4>
+			<div align="center">{{result|safe}}</div>
+
+		</div>
+		<br>
+		<div>
+			<h4 class="secondary-heading">
+				<strong>Predicted Points</strong>
+			</h4>
+			{{result2|safe}}
+		</div>
+		<hr>
+
+	</div>
+
+</body>
+
+</html>
