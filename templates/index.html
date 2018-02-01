@@ -33,7 +33,6 @@
 	</ul>
 
 	<div class="container">
-		<br>
 		<div>
 			<h1 class="main-heading">
 				<strong>Wine Rating Predictor</strong>
@@ -46,12 +45,15 @@
 			</h4>
 			{{results2|safe}}
 		</div>
-		<br>
 		<div>
 			<h4 class="secondary-heading">
 				<strong>Predicted Points</strong>
 			</h4>
 			{{results3|safe}}
+			<h4 class="secondary-heading">
+				<strong>Predicted Rolling 4-Points Range</strong>
+			</h4>
+			{{result3|safe}}
 		</div>
 		<hr>
 		<div>
@@ -108,12 +110,11 @@
 						</div>
 
 					</div>
-					<br>
+					<!-- <br> -->
 					<button type="submit" class="btn btn-default form-control" style="font-weight: bold;">Submit</button>
 				</div>
 			</form>
 		</div>
-		<br>
 		<div>
 			<h4 class="secondary-heading">
 				<strong>Selected Wine Attributes</strong>
@@ -121,12 +122,15 @@
 			<div align="center">{{result|safe}}</div>
 
 		</div>
-		<br>
 		<div>
 			<h4 class="secondary-heading">
 				<strong>Predicted Points</strong>
 			</h4>
 			{{result2|safe}}
+			<h4 class="secondary-heading">
+				<strong>Predicted Rolling 4-Points Range</strong>
+			</h4>
+			{{result4|safe}}
 		</div>
 		<hr>
 

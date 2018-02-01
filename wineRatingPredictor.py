@@ -127,6 +127,30 @@ def predictPoints():
     selWine = selectWine()
     selectedWine = selWine[0]
     predictedRating = selWine[1]
+    if int(selectedWine['points'].values[0]) >= int(predictedRating):
+        if (int(selectedWine['points'].values[0]) - int(predictedRating)) == 0:
+            predctdRange = str((predictedRating - 2)) + ' - ' + str((predictedRating + 2))
+        elif (int(selectedWine['points'].values[0]) - int(predictedRating)) == 1:
+            predctdRange = str((predictedRating - 1)) + ' - ' + str((predictedRating + 3))
+        else:
+            predctdRange = str((predictedRating)) + ' - ' + str((predictedRating + 4))
+        # else if (int(selectedWine['points'].values[0]) - int(predictedRating)) == 2:
+        #     predctdRange = str((predictedRating)) + ' - ' + str((predictedRating + 4))
+        # else if (int(selectedWine['points'].values[0]) - int(predictedRating)) == 3:
+        #     predctdRange = str((predictedRating + 1)) + ' - ' + str((predictedRating + 4))
+        # else if (int(selectedWine['points'].values[0]) - int(predictedRating)) == 4:
+        #     predctdRange = str((predictedRating)) + ' - ' + str((predictedRating + 4))
+            
+        # predctdRange = str(predictedRating) + ' - ' + str(selectedWine['points'].values[0])
+    else:
+        if (int(predictedRating) - int(selectedWine['points'].values[0])) == 1:
+            predctdRange = str((int(selectedWine['points'].values[0]) - 1)) + ' - ' + str((int(selectedWine['points'].values[0]) + 3))
+        else:
+            predctdRange = str((int(selectedWine['points'].values[0]))) + ' - ' + str((int(selectedWine['points'].values[0]) + 4))
+        
+
+        # predctdRange = str(selectedWine['points'].values[0]) + ' - ' + str(predictedRating)
+
     if(request.form.get('varieties') is None and request.form.get('wineries') is None and request.form.get('regions') is None and request.form.get('price') is None):
         variety = variety_category[0]
         winery = winery_category[0]
@@ -137,14 +161,17 @@ def predictPoints():
         winery = request.form.get('wineries')
         region = request.form.get('regions')
         price = float(request.form.get('price'))
-    predctdVal = predict_points(variety, price, winery, region)
     df1 = pd.DataFrame({
     'variety': variety,
     'winery': winery,
     'region_1': region,
     'price': price
     }, index=[0])
-    return render_template('index.html', varieties=variety_category, wineries=winery_category, regions=region_1_category, results2=selectedWine.to_html(index=False),results3=predictedRating, result=df1.to_html(index=False), result2=predctdVal)
+
+    # df1.style.set_properties(subset=['variety','winery','region_1','price'], **{'width': '300px'})
+    predctdVal = predict_points(variety, price, winery, region)
+    predctdRange2 = str((predctdVal - 2)) + ' - ' + str((predctdVal + 2))
+    return render_template('index.html', varieties=variety_category, wineries=winery_category, regions=region_1_category, results2=selectedWine.to_html(index=False),results3=predictedRating, result=df1.to_html(index=False,col_space=10), result2=predctdVal, result3=predctdRange, result4=predctdRange2)
 
 
 if __name__ == "__main__":
